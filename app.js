@@ -8,6 +8,7 @@
 // update DOM to reflect the new state
 
 const submit = document.getElementById('submit');
+const questionInput = document.getElementById('question-input');
 const questionContainer = document.getElementById('question-container');
 const fortuneContainer = document.getElementById('fortune');
 const result = document.getElementById('result');
@@ -33,11 +34,19 @@ const answers = [
     'Very doubtful',
 ];
 
-submit.addEventListener('click', () => {
+submit.addEventListener('click', handleSubmit);
+questionInput.addEventListener('keypress', (event) => {
+    console.log(event.key);
+    if (event.key === 'Enter') {
+        handleSubmit();
+    }
+});
+
+function handleSubmit() {
     questionContainer.classList.toggle('hide');
     fortuneContainer.classList.toggle('hide');
     const randNum = Math.floor(Math.random() * answers.length);
     const randomAnswer = answers[randNum];
     console.log(randomAnswer);
     result.textContent = randomAnswer;
-});
+}
